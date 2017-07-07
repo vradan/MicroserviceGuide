@@ -4,8 +4,8 @@ resource "aws_security_group" "etcd-sg" {
   vpc_id = "${data.terraform_remote_state.vpc.vpc-id}"
 
   ingress {
-    from_port   = 0
-    to_port     = 0
+    from_port   = -1
+    to_port     = -1
     protocol    = "icmp"
     cidr_blocks = ["0.0.0.0/0"]
   }
