@@ -1,4 +1,4 @@
-resource "aws_instance" "etcd-node" {
+resource "aws_instance" "etcd" {
   count = "${var.count}"
 
   ami = "${module.global-vars.coreos-stable-ami}"
@@ -12,7 +12,7 @@ resource "aws_instance" "etcd-node" {
   user_data = "${element(data.template_file.cloud-config.*.rendered, count.index)}"
 
   tags {
-    Name = "etcd-node-${count.index}"
+    Name = "etcd-node-${count.index + 1}"
   }
 
   root_block_device {
