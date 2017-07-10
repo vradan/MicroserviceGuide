@@ -11,6 +11,10 @@ resource "aws_instance" "etcd" {
 
   user_data = "${element(data.template_file.cloud-config.*.rendered, count.index)}"
 
+  iam_instance_profile = "${data.terraform_remote_state.iam.flannel-profile}"
+
+  source_dest_check = false
+
   tags {
     Name = "etcd-node-${count.index + 1}"
   }

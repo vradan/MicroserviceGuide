@@ -29,6 +29,15 @@ data "terraform_remote_state" "hosted-zone" {
   }
 }
 
+data "terraform_remote_state" "iam" {
+  backend = "s3"
+  config {
+    bucket = "${module.global-vars.s3-bucket}"
+    key = "${module.global-vars.s3-bucket-path}/base/iam/terraform.tfstate"
+    region = "${module.global-vars.default-region}"
+  }
+}
+
 data "template_file" "cloud-config" {
   count = "${var.count}"
   template = "${file("./cloud_config.tpl")}"
