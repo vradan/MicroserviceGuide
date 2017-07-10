@@ -21,13 +21,13 @@ resource "aws_iam_role" "flannel-role" {
 EOF
 }
 
-resource "aws_iam_instance_profile" "Flannel-profile" {
+resource "aws_iam_instance_profile" "flannel-profile" {
   name  = "Flannel"
   role = "${aws_iam_role.flannel-role.name}"
 }
 
 resource "aws_iam_role_policy" "route-table-policy" {
-  name = "route-table-_policy"
+  name = "route-table-policy"
   role = "${aws_iam_role.flannel-role.id}"
 
   policy = <<EOF
