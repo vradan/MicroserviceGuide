@@ -11,15 +11,6 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
-data "terraform_remote_state" "sg" {
-  backend = "s3"
-  config {
-    bucket = "${module.global-vars.s3-bucket}"
-    key = "${module.global-vars.s3-bucket-path}/base/security-groups/terraform.tfstate"
-    region = "${module.global-vars.default-region}"
-  }
-}
-
 data "terraform_remote_state" "hosted-zone" {
   backend = "s3"
   config {
