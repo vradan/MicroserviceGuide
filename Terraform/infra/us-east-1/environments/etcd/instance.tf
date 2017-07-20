@@ -4,7 +4,7 @@ resource "aws_instance" "etcd" {
   ami = "${module.global-vars.coreos-stable-ami}"
   instance_type = "${var.instance-type}"
 
-  vpc_security_group_ids = ["${data.terraform_remote_state.sg.etcd-sg-id}"]
+  vpc_security_group_ids = ["${aws_security_group.etcd-sg.id}"]
   subnet_id = "${element(data.terraform_remote_state.vpc.subnets, count.index)}"
 
   key_name = "${module.global-vars.keypair}"
