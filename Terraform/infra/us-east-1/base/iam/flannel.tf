@@ -2,7 +2,7 @@ resource "aws_iam_role" "flannel-role" {
   name = "Flannel"
   path = "/terraform/"
 
-  description = "Role used by Flannel to create routes in route tables"
+  description = "Role used by Flannel to manage VPC"
 
   assume_role_policy = <<EOF
 {
