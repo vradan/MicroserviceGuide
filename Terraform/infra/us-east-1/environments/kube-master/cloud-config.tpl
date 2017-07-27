@@ -64,6 +64,7 @@ coreos:
           --network-plugin=cni \
           --cni-bin-dir=/etc/cni/bin \
           --node-labels="nodeRole=master" \
+          --hostname-override=${hostname} \
           --cloud-provider=aws
         Restart=always
         RestartSec=10
@@ -79,7 +80,8 @@ coreos:
         [Service]
         ExecStart=/opt/kubernetes/bin/kube-proxy \
           --kubeconfig=/var/lib/kube-proxy/kubeconfig \
-          --master=http://127.0.0.1:8080
+          --master=http://127.0.0.1:8080 \
+          --hostname-override=${hostname}
         Restart=always
         RestartSec=10
         [Install]

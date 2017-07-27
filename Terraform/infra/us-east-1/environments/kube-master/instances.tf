@@ -38,6 +38,8 @@ resource "aws_instance" "kubernetes-master" {
   provisioner "remote-exec" {
     inline = [
       "sudo mkdir -p /etc/kubernetes/ssl",
+      "sudo mkdir -p /etc/docker/certs.d/registry.vradan.com/",
+      "sudo mv /tmp/certs/registry.crt /etc/docker/certs.d/registry.vradan.com/ca.crt",
       "sudo mv /tmp/certs/ca.crt /etc/kubernetes/ssl/ca.crt",
       "sudo mv /tmp/certs/apiserver.crt /etc/kubernetes/ssl/apiserver.crt",
       "sudo mv /tmp/certs/apiserver.key /etc/kubernetes/ssl/apiserver.key",
@@ -55,7 +57,7 @@ resource "aws_instance" "kubernetes-master" {
       "tar xvzf /tmp/kubernetes-node-linux-amd64.tar.gz -C /tmp/",
       "sudo mv /tmp/kubernetes/node/bin/ /opt/kubernetes/",
       "sudo chmod -R 755 /opt/kubernetes/",
-      "/opt/kubernetes/bin/kubectl config set-cluster main-cluster --certificate-authority=/etc/kubernetes/ssl/ca.crt --embed-certs=true --server=https://k8smaster.vradan.com",
+      "/opt/kubernetes/bin/kubectl config set-cluster main-cluster --certificate-authority=/etc/kubernetes/ssl/ca.crt --embed-certs=true --server=https://kubemaster.vradan.com",
       "/opt/kubernetes/bin/kubectl config set-credentials apiserver --client-certificate=/etc/kubernetes/ssl/apiserver.crt --client-key=/etc/kubernetes/ssl/apiserver.key --embed-certs=true",
       "/opt/kubernetes/bin/kubectl config set-context main-context --cluster=main-cluster --user=apiserver",
       "/opt/kubernetes/bin/kubectl config use-context main-context",
