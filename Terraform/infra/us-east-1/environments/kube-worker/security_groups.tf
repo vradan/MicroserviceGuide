@@ -18,6 +18,13 @@ resource "aws_security_group" "worker-sg" {
   }
 
   ingress {
+    from_port   = 30000
+    to_port     = 32767
+    protocol    = "TCP"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
     from_port   = 10250
     to_port     = 10250
     protocol    = "TCP"

@@ -31,10 +31,9 @@ data "terraform_remote_state" "iam" {
 
 data "template_file" "cloud-config" {
   template = "${file("./cloud-config.tpl")}"
-  count = "${var.worker-count}"
 
   vars {
-    hostname = "kube-worker-${count.index + 1}"
+    hostname = "kube-worker"
     token = "${module.global-vars.etcd-token}"
   }
 }
