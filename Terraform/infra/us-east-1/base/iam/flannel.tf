@@ -37,19 +37,18 @@ resource "aws_iam_role_policy" "route-table-policy" {
     {
           "Effect": "Allow",
           "Action": [
-              "ec2:CreateRoute",
-              "ec2:DeleteRoute",
-              "ec2:ReplaceRoute"
-          ],
-          "Resource": [
-              "*"
-          ]
-    },
-    {
-          "Effect": "Allow",
-          "Action": [
-              "ec2:DescribeRouteTables",
-              "ec2:DescribeInstances"
+                "ec2:AttachVolume",
+                "ec2:CreateRoute",
+                "ec2:CreateTags",
+                "ec2:CreateVolume",
+                "ec2:DeleteRoute",
+                "ec2:DeleteVolume",
+                "ec2:DescribeInstances",
+                "ec2:DescribeRouteTables",
+                "ec2:DescribeVolumes",
+                "ec2:DetachVolume",
+                "ec2:ReplaceRoute",
+                "elasticloadbalancing:DescribeLoadBalancers"
           ],
           "Resource": "*"
     }
